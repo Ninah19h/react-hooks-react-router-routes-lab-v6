@@ -1,16 +1,21 @@
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import data from "../../db.json";
 
-function Movie() {
+export default function Movie() {
+  const { id } = useParams();
+  const movie = data.movies.find((movie) => movie.id === parseInt(id));
+
+  if (!movie) return <div>Movie not found</div>;
+
   return (
-    <>
-      <header>
-        {/* What component should go here? */}
-      </header>
-      <main>
-        {/* Movie info here! */}
-      </main>
-    </>
+    <div>
+      <h1>{movie.title}</h1>
+      <p>{movie.time} min</p>
+      <div>
+        {movie.genres.map((genre, index) => (
+          <span key={index}>{genre}</span>
+        ))}
+      </div>
+    </div>
   );
-};
-
-export default Movie;
+}

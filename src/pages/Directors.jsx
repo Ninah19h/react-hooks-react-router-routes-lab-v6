@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import data from "../../db.json";
 
-function Directors() {
+export default function Directors() {
   return (
-    <>
-      <header>
-        {/* What component should go here? */}
-      </header>
-      <main>
-        {/* Director info here! */}
-      </main>
-    </>
+    <div>
+      <h1>Directors Page</h1>
+      {data.directors.map((director) => (
+        <div key={director.name}>
+          <h2>{director.name}</h2>
+          <ul>
+            {director.movies.map((movie) => (
+              <li key={movie}>{movie}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
   );
-};
-
-export default Directors;
+}
